@@ -100,8 +100,9 @@ def generate_hw01(question):
 
     model = create_model(ACTIVE_MODEL)
     response = model.invoke(messages)
-    
-    return response.content.strip().removeprefix("```").removesuffix("```")
+
+    result = response.content.strip().removeprefix("```").removesuffix("```")
+    return result
     
 def generate_hw02(question):
     agent_prompt_str = """
@@ -155,7 +156,9 @@ def generate_hw02(question):
     agent_executor = AgentExecutor(agent = agent, tools = tools)
     response = agent_executor.invoke({"input": question})
 
-    return response["output"].strip().removeprefix("```").removesuffix("```")
+    result = response["output"].strip().removeprefix("```").removesuffix("```")
+    print(result)
+    return result
     
 def generate_hw03(question2, question3):
     agent_prompt_str = """
@@ -224,6 +227,7 @@ def generate_hw03(question2, question3):
     agent = create_tool_calling_agent(model, tools, agent_prompt)
     agent_executor = AgentExecutor(agent = agent, tools = tools)
 
+    # Create chat history
     store = {}
     def get_session_history(session_id: str) -> BaseChatMessageHistory:
         if session_id not in store:
@@ -247,7 +251,9 @@ def generate_hw03(question2, question3):
         config = {"configurable": {"session_id": session_id}},
     )
 
-    return response["output"].strip().removeprefix("```").removesuffix("```")
+    result = response["output"].strip().removeprefix("```").removesuffix("```")
+    print(result)
+    return result
     
 def generate_hw04(question):
     def encode_to_image_url(image_path, image_type = "jpeg"):
@@ -290,8 +296,10 @@ def generate_hw04(question):
 
     model = create_model(ACTIVE_MODEL)
     response = model.invoke(messages)
-    
-    return response.content.strip().removeprefix("```").removesuffix("```")
+
+    result = response.content.strip().removeprefix("```").removesuffix("```")
+    print(result)
+    return result
     
 def demo(question):
     llm = AzureChatOpenAI(
