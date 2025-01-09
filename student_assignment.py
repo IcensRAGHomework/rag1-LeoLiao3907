@@ -89,7 +89,8 @@ def generate_hw01(question):
         Ensure that the output is in valid JSON format without any additional text likes backticks.
 
         The language of the output result will be translated 
-        to match the language of the input string.
+        to match the language of the input string and keep the tags of JSON
+        in English.
     """
 
     messages = [
@@ -125,7 +126,8 @@ def generate_hw02(question):
         Ensure that the output is in valid JSON format without any additional text likes backticks.
 
         The language of the output result will be translated 
-        to match the language of the input string.
+        to match the language of the input string and keep the tags of JSON
+        in English.
     """
     agent_prompt = ChatPromptTemplate.from_messages(
         [
@@ -194,7 +196,8 @@ def generate_hw03(question2, question3):
         Ensure that the output is in valid JSON format without any additional text likes backticks.
 
         The language of the output result will be translated 
-        to match the language of the input string.
+        to match the language of the input string and keep the tags of JSON
+        in English.
     """
     agent_prompt = ChatPromptTemplate.from_messages(
         [
@@ -269,7 +272,8 @@ def generate_hw04(question):
         Ensure that the output is in valid JSON format without any additional text likes backticks.
 
         The language of the output result will be translated 
-        to match the language of the input string.
+        to match the language of the input string and keep the tags of JSON
+        in English.
     """
 
     messages = [
