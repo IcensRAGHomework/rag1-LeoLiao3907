@@ -78,15 +78,15 @@ def generate_hw01(question):
         You are a helpful assistant who provides clear and accurate information.
         When a query relates to holidays, you will deliver dates and names in structured JSON format.
         The JSON structure should look like this:
-        {
+        {{
             "Result": [
-                {
+                {{
                     "date": "2024-12-25",
                     "name": "Christmas"
-                }
+                }}
             ]
-        }
-        Ensure that the output is in valid JSON format without any additional text
+        }}
+        Ensure that the output is in valid JSON format without any additional text likes backticks.
 
         The language of the output result will be translated 
         to match the language of the input string.
@@ -100,7 +100,7 @@ def generate_hw01(question):
     model = create_model(ACTIVE_MODEL)
     response = model.invoke(messages)
     
-    return response.content
+    return response.content.strip().removeprefix("```").removesuffix("```")
     
 def generate_hw02(question):
     agent_prompt_str = """
@@ -122,6 +122,7 @@ def generate_hw02(question):
                 }}
             ]
         }}
+        Ensure that the output is in valid JSON format without any additional text likes backticks.
 
         The language of the output result will be translated 
         to match the language of the input string.
@@ -152,7 +153,7 @@ def generate_hw02(question):
     agent_executor = AgentExecutor(agent = agent, tools = tools)
     response = agent_executor.invoke({"input": question})
 
-    return response["output"]
+    return response["output"].strip().removeprefix("```").removesuffix("```")
     
 def generate_hw03(question2, question3):
     agent_prompt_str = """
@@ -173,6 +174,7 @@ def generate_hw03(question2, question3):
                 }}
             ]
         }}
+        Ensure that the output is in valid JSON format without any additional text likes backticks.
 
         If the given question is about "is the given holiday in the list?",
         you should check the list and determine if the holiday exists 
@@ -189,7 +191,7 @@ def generate_hw03(question2, question3):
                         and shows all the contents of the current list for reference."
             }}
         }}
-        Ensure the output is in valid JSON format without any additional text.
+        Ensure that the output is in valid JSON format without any additional text likes backticks.
 
         The language of the output result will be translated 
         to match the language of the input string.
@@ -242,7 +244,7 @@ def generate_hw03(question2, question3):
         config = {"configurable": {"session_id": session_id}},
     )
 
-    return response["output"]
+    return response["output"].strip().removeprefix("```").removesuffix("```")
     
 def generate_hw04(question):
     def encode_to_image_url(image_path, image_type = "jpeg"):
@@ -264,7 +266,7 @@ def generate_hw04(question):
                 "score": 1234
             }}
         }}
-        Ensure that the output is in valid JSON format without any additional text.
+        Ensure that the output is in valid JSON format without any additional text likes backticks.
 
         The language of the output result will be translated 
         to match the language of the input string.
@@ -285,7 +287,7 @@ def generate_hw04(question):
     model = create_model(ACTIVE_MODEL)
     response = model.invoke(messages)
     
-    return response.content
+    return response.content.strip().removeprefix("```").removesuffix("```")
     
 def demo(question):
     llm = AzureChatOpenAI(
